@@ -1,6 +1,8 @@
 #ifndef SECP256K1_H
 #define SECP256K1_H
 
+#include <stddef.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

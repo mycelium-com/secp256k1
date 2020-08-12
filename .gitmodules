@@ -1,3 +1,6 @@
 [submodule "extras/hashing"]
 	path = extras/hashing
 	url = https://github.com/mycelium-com/hashing
+[submodule "extras/micro-secp256k1"]
+	path = extras/micro-secp256k1
+	url = https://github.com/mycelium-com/micro-secp256k1

@@ -6,16 +6,17 @@ add_subdirectory(extras/hashing)
 
 set(secp256k1_src
    src/sign.c
-   src/keychain.c
    src/add_scalar.c
    src/keypair.c
    src/verify.c
+   extras/micro-secp256k1/uECC.c
 )
 
 add_library(secp256k1 ${secp256k1_src})
 
 target_include_directories(secp256k1 PRIVATE include)
 target_include_directories(secp256k1 PRIVATE extras/hashing/include)
+target_include_directories(secp256k1 PRIVATE extras/micro-secp256k1)
 
 set_target_properties(secp256k1 PROPERTIES
    VERSION ${PROJECT_VERSION}
