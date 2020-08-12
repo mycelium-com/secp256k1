@@ -9,6 +9,9 @@ int secp256k1_verify(const unsigned char *signature, const unsigned char *messag
     unsigned char tmp[64];
     const unsigned char *uecc_pubkey;
 
+    // Space for deserialized signature
+    uint8_t tmpsig[64];
+
     // Compressed keys must be uncompressed first
     if (public_key[0] != 0x04) {
         // Decompress public key
@@ -21,6 +24,9 @@ int secp256k1_verify(const unsigned char *signature, const unsigned char *messag
         uecc_pubkey = public_key + 1;
     }
 
-    // Verify signature
-    return uECC_verify(uecc_pubkey, message, message_len, signature, secp256k1);
+    // Deserialize
+    uECC_deserialize_der(signature, tmpsig);
+
+    // Verify deserialized signature
+    return uECC_verify(uecc_pubkey, message, message_len, tmpsig, secp256k1);
 }
