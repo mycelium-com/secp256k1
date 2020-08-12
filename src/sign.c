@@ -44,5 +44,5 @@ void secp256k1_sign(unsigned char *signature, const unsigned char *message, size
     uECC_normalize_signature(tmpsig, secp256k1);
 
     // Serialize to DER
-    uECC_serialize_der(tmpsig, signature);
+    uECC_serialize_der(tmpsig, signature, secp256k1);
 }

@@ -25,7 +25,7 @@ int secp256k1_verify(const unsigned char *signature, const unsigned char *messag
     }
 
     // Deserialize
-    uECC_deserialize_der(signature, tmpsig);
+    uECC_deserialize_der(signature, tmpsig, secp256k1);
 
     // Verify deserialized signature
     return uECC_verify(uecc_pubkey, message, message_len, tmpsig, secp256k1);
