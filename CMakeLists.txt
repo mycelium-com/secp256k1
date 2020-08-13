@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.9)
 project(secp256k1 VERSION 1.0.0 DESCRIPTION "SECP256K1 utilities library")
 
+if (NOT TARGET hashing)
 # Hashing functions library
 add_subdirectory(extras/hashing)
+endif()
 
 set(secp256k1_src
    src/sign.c
