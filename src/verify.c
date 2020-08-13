@@ -1,7 +1,7 @@
 #include "secp256k1.h"
 #include "uECC.h"
 
-int secp256k1_verify(const unsigned char *signature, const unsigned char *message, size_t message_len, const unsigned char *public_key) {
+int secp256k1_verify(const unsigned char *signature, const unsigned int signature_len, const unsigned char *message, size_t message_len, const unsigned char *public_key) {
     
     const struct uECC_Curve_t* secp256k1 = uECC_secp256k1();
 
@@ -25,7 +25,7 @@ int secp256k1_verify(const unsigned char *signature, const unsigned char *messag
     }
 
     // Deserialize
-    uECC_deserialize_der(signature, tmpsig, secp256k1);
+    uECC_der_to_compact(signature, signature_len, tmpsig);
 
     // Verify deserialized signature
     return uECC_verify(uecc_pubkey, message, message_len, tmpsig, secp256k1);

@@ -39,10 +39,7 @@ void secp256k1_sign(unsigned char *signature, const unsigned char *message, size
 
     // Generate deterministic signature
     uECC_sign_deterministic(private_key, message, message_len, &ctx.uECC, tmpsig, secp256k1);
-    
-    // Only low-S signatures are considered valid
-    uECC_normalize_signature(tmpsig, secp256k1);
 
     // Serialize to DER
-    uECC_serialize_der(tmpsig, signature, secp256k1);
+    uECC_compact_to_der(tmpsig, signature, secp256k1);
 }
