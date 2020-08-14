@@ -4,10 +4,9 @@
 #include "types.h"
 
 void secp256k1_get_pubkey(unsigned char *public_key, const unsigned char *private_key) {
-    const struct uECC_Curve_t* secp256k1 = uECC_secp256k1();
-    unsigned char tmp[uECC_curve_public_key_size(secp256k1)];
-    uECC_compute_public_key(private_key, tmp, secp256k1);
-    uECC_compress(tmp, public_key, secp256k1);
+    unsigned char tmp[64];
+    uECC_compute_public_key(private_key, tmp);
+    uECC_compress(tmp, public_key);
 }
 
 void secp256k1_create_privkey(unsigned char *private_key, const unsigned char *seed) {

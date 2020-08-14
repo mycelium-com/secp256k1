@@ -2,8 +2,6 @@
 #include "uECC.h"
 
 int secp256k1_verify(const unsigned char *signature, const unsigned int signature_len, const unsigned char *message, size_t message_len, const unsigned char *public_key) {
-    
-    const struct uECC_Curve_t* secp256k1 = uECC_secp256k1();
 
     // Space for key decompression
     unsigned char tmp[64];
@@ -15,7 +13,7 @@ int secp256k1_verify(const unsigned char *signature, const unsigned int signatur
     // Compressed keys must be uncompressed first
     if (public_key[0] != 0x04) {
         // Decompress public key
-        uECC_decompress(public_key, tmp, secp256k1);
+        uECC_decompress(public_key, tmp);
         uecc_pubkey = tmp;
     }
 
@@ -28,5 +26,5 @@ int secp256k1_verify(const unsigned char *signature, const unsigned int signatur
     uECC_der_to_compact(signature, signature_len, tmpsig);
 
     // Verify deserialized signature
-    return uECC_verify(uecc_pubkey, message, message_len, tmpsig, secp256k1);
+    return uECC_verify(uecc_pubkey, message, message_len, tmpsig);
 }

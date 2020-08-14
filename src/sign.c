@@ -24,8 +24,6 @@ static void finish_hash(const uECC_HashContext *base, uint8_t *hash_result) {
 
 void secp256k1_sign(unsigned char *signature, const unsigned char *message, size_t message_len, const unsigned char *public_key, const unsigned char *private_key) {
 
-    const struct uECC_Curve_t* secp256k1 = uECC_secp256k1();
-
     uint8_t tmpsig[64];
     uint8_t tmp[2 * SHA3_256_DIGEST_LENGTH + SHA3_256_BLOCK_LENGTH];
     HashContext ctx = {{
@@ -38,8 +36,8 @@ void secp256k1_sign(unsigned char *signature, const unsigned char *message, size
     }};
 
     // Generate deterministic signature
-    uECC_sign_deterministic(private_key, message, message_len, &ctx.uECC, tmpsig, secp256k1);
+    uECC_sign_deterministic(private_key, message, message_len, &ctx.uECC, tmpsig);
 
     // Serialize to DER
-    uECC_compact_to_der(tmpsig, signature, secp256k1);
+    uECC_compact_to_der(tmpsig, signature);
 }
