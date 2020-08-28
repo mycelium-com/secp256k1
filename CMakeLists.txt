@@ -15,7 +15,7 @@ set(secp256k1_src
 )
 
 add_library(secp256k1 ${secp256k1_src})
-
+target_link_libraries(secp256k1 hashing)
 target_include_directories(secp256k1 PRIVATE include)
 target_include_directories(secp256k1 PRIVATE extras/hashing/include)
 target_include_directories(secp256k1 PRIVATE extras/micro-secp256k1)
