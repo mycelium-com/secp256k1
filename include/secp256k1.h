@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+int secp256k1_verify_privkey(const unsigned char *private_key);
+int secp256k1_verify_pubkey(const unsigned char *public_key);
 void secp256k1_get_pubkey(unsigned char *public_key, const unsigned char *private_key);
 void secp256k1_get_compressed_pubkey(unsigned char *public_key, const unsigned char *private_key);
 void secp256k1_get_uncompressed_pubkey(unsigned char *public_key, const unsigned char *private_key);

@@ -5,6 +5,22 @@
 
 #include <string.h>
 
+int secp256k1_verify_privkey(const unsigned char *private_key) {
+    return uECC_valid_private_key(private_key);
+}
+
+int secp256k1_verify_pubkey(const unsigned char *public_key) {
+    unsigned char tmp[64];
+    const unsigned char *ptmp = public_key + 1;
+
+    // Check prefix
+    if (public_key[0] != 0x04 && public_key[0] != 0x02 && public_key[0] != 0x03)
+        return 0;
+
+    secp256k1_decompress_pubkey(tmp, public_key);
+    return uECC_valid_public_key(tmp);
+}
+
 void secp256k1_compress_pubkey(unsigned char *compressed, const unsigned char *public_key) {
     if (public_key[0] == 0x04) {
         uECC_compress(public_key + 1, compressed);
