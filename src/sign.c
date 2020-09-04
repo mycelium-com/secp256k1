@@ -14,7 +14,7 @@ static void finish_HMAC(const struct uECC_HashContext *base, uint8_t *digest) {
     hmac_sha3_256_final((hmac_sha3_256_ctx *) base->ctx, digest, SHA3_256_DIGEST_LENGTH);
 }
 
-void secp256k1_sign(unsigned char *signature, const unsigned char *message, size_t message_len, const unsigned char *private_key) {
+int secp256k1_sign(unsigned char *signature, const unsigned char *message, size_t message_len, const unsigned char *private_key) {
 
     uint8_t tmpsig[64];
     uint8_t tmp[2 * SHA3_256_DIGEST_LENGTH + 1];
@@ -29,8 +29,11 @@ void secp256k1_sign(unsigned char *signature, const unsigned char *message, size
     };
 
     // Generate deterministic signature
-    uECC_sign_deterministic(private_key, message, message_len, &ctx, tmpsig);
+    if (0 != uECC_sign_deterministic(private_key, message, message_len, &ctx, tmpsig)) {
+        // Serialize to DER
+        uECC_compact_to_der(tmpsig, signature);
+        return 1;
+    }
 
-    // Serialize to DER
-    uECC_compact_to_der(tmpsig, signature);
+    return 0;
 }
