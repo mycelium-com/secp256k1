@@ -1,5 +1,5 @@
-#ifndef SECP256K1_H
-#define SECP256K1_H
+#ifndef _SECP_256K1_H
+#define _SECP_256K1_H
 
 #include <stddef.h>
 
