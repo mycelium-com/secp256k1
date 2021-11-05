@@ -1,7 +1,7 @@
 #include "secp256k1.h"
 #include "uECC.h"
 
-int secp256k1_add_scalar(unsigned char *public_key, unsigned char *private_key, const unsigned char *scalar) {
+int myc_secp256k1_add_scalar(unsigned char *public_key, unsigned char *private_key, const unsigned char *scalar) {
     // Space for key decompression
     unsigned char decompressed[64];
 

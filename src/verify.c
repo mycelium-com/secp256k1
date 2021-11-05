@@ -1,7 +1,7 @@
 #include "secp256k1.h"
 #include "uECC.h"
 
-int secp256k1_verify(const unsigned char *signature, const unsigned int signature_len, const unsigned char *message, size_t message_len, const unsigned char *public_key) {
+int myc_secp256k1_verify(const unsigned char *signature, const unsigned int signature_len, const unsigned char *message, size_t message_len, const unsigned char *public_key) {
 
     // Space for key decompression
     unsigned char decompressed[64];
