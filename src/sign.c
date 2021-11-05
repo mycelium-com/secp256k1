@@ -11,7 +11,7 @@ static void update_HMAC(const struct uECC_HashContext *base, const uint8_t *data
 }
 
 static void finish_HMAC(const struct uECC_HashContext *base, uint8_t *digest) {
-    myc_hmac_sha3_256_final((myc_hmac_sha3_256_ctx *) base->ctx, digest, SHA3_256_DIGEST_LENGTH);
+    myc_hmac_sha3_256_final((myc_hmac_sha3_256_ctx *) base->ctx, digest, MYC_SHA3_256_DIGEST_LENGTH);
 }
 
 int secp256k1_sign(unsigned char *signature, const unsigned char *message, size_t message_len, const unsigned char *private_key) {
@@ -24,7 +24,7 @@ int secp256k1_sign(unsigned char *signature, const unsigned char *message, size_
         &update_HMAC,
         &finish_HMAC,
         &hmac_ctx,
-        SHA3_256_DIGEST_LENGTH,
+        MYC_SHA3_256_DIGEST_LENGTH,
         tmp
     };
 
