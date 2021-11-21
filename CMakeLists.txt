@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.9)
 project(secp256k1 VERSION 1.0.0 DESCRIPTION "SECP256K1 utilities library")
 
+include(GNUInstallDirs)
+
 if (NOT TARGET hashing)
 # Hashing functions library
 add_subdirectory(extras/hashing)
@@ -14,6 +16,7 @@ set(secp256k1_src
    extras/micro-secp256k1/uECC.c
 )
 
+if (NOT TARGET secp256k1)
 add_library(secp256k1 ${secp256k1_src})
 target_link_libraries(secp256k1 hashing)
 target_include_directories(secp256k1 PRIVATE include)
@@ -26,11 +29,11 @@ set_target_properties(secp256k1 PROPERTIES
    PUBLIC_HEADER "include/secp256k1.h"
 )
 
-include(GNUInstallDirs)
 install(TARGETS secp256k1
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+endif()
 
 configure_file(secp256k1.pc.in secp256k1.pc @ONLY)
 install(FILES ${CMAKE_BINARY_DIR}/secp256k1.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
