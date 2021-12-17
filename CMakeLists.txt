@@ -36,7 +36,7 @@ install(TARGETS secp256k1
 
 add_executable(create_keypair misc/create_keypair.c)
 target_include_directories(create_keypair PRIVATE include)
-target_link_libraries(create_keypair secp256k1)
+target_link_libraries(create_keypair secp256k1 $<$<PLATFORM_ID:Linux>:"-lbsd">)
 endif()
 
 configure_file(secp256k1.pc.in secp256k1.pc @ONLY)
