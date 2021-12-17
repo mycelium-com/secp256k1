@@ -34,9 +34,9 @@ install(TARGETS secp256k1
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-add_executable(create_keypair misc/create_keypair.c)
-target_include_directories(create_keypair PRIVATE include)
-target_link_libraries(create_keypair secp256k1 $<$<PLATFORM_ID:Linux>:bsd>)
+add_executable(create_keypair_secp256k1 misc/create_keypair.c)
+target_include_directories(create_keypair_secp256k1 PRIVATE include)
+target_link_libraries(create_keypair_secp256k1 secp256k1 $<$<PLATFORM_ID:Linux>:bsd>)
 endif()
 
 configure_file(secp256k1.pc.in secp256k1.pc @ONLY)
