@@ -19,6 +19,7 @@ void myc_secp256k1_create_keypair(unsigned char *public_key, unsigned char *priv
 int myc_secp256k1_sign(unsigned char *signature, const unsigned char *message, size_t message_len, const unsigned char *private_key);
 int myc_secp256k1_verify(const unsigned char *signature, const unsigned int signature_len, const unsigned char *message, size_t message_len, const unsigned char *public_key);
 int myc_secp256k1_add_scalar(unsigned char *public_key, unsigned char *private_key, const unsigned char *scalar);
+int myc_secp256k1_shared_secret(const unsigned char *public_key, const unsigned char *private_key, unsigned char *secret);
 
 #ifdef __cplusplus
 }
