@@ -63,5 +63,5 @@ void myc_secp256k1_create_keypair(unsigned char *public_key, unsigned char *priv
 }
 
 int myc_secp256k1_shared_secret(const unsigned char *public_key, const unsigned char *private_key, unsigned char *secret) {
-    return uECC_shared_secret(public_key, private_key, secret);
+    return uECC_shared_secret(public_key + 1, private_key, secret);
 }
